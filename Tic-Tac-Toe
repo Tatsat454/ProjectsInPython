@@ -1,0 +1,126 @@
+#This will be my Tic Tac Toe game in Python
+
+
+
+#So first we will create a board
+board = [[' ', ' ', ' '],
+         [' ', ' ', ' '],
+         [' ', ' ', ' ']]
+
+def print_board():
+    print("Current board:")
+    print (board[0][0] + ' | ' + board[0][1] + ' | ' + board[0][2])
+    print("---------")
+    print(board[1][0] + ' | ' + board[1][1] + ' | ' + board[1][2])
+    print("---------")
+    print(board[2][0] + ' | ' + board[2][1] + ' | ' + board[2][2])
+    print("---------")
+
+
+
+
+#Board works so --> I will now input player moves and then I'll put the input validation with it,
+
+
+
+def player1_move():
+    player1_choice = int(input("Player 1 Now Enter your move (1-9): "))
+    if player1_choice == 1 and board[0][0] == ' ':
+        board[0][0] = 'X'
+    elif player1_choice == 2 and board[0][1] == ' ':
+        board[0][1] = 'X'
+    elif player1_choice == 3 and board[0][2] == ' ':       
+        board[0][2] = 'X'
+    elif player1_choice == 4 and board[1][0] == ' ' :  
+        board[1][0] = 'X'
+    elif player1_choice == 5 and board[1][1] == ' ': 
+        board[1][1] = 'X'
+    elif player1_choice == 6 and board[1][2] == ' ':
+        board[1][2] = 'X'
+    elif player1_choice == 7 and board[2][0] == ' ':
+        board[2][0] = 'X'
+    elif player1_choice == 8 and board[2][1] == ' ':
+        board[2][1] = 'X'
+    elif player1_choice == 9 and board[2][2] == ' ':
+        board[2][2] = 'X'
+    else:
+        print("Invalid move. Please try again.")
+        player1_move()
+
+
+
+def player2_move():
+    player2_choice = int(input("Player 2 Now Enter your move (1-9): "))
+    if player2_choice == 1 and board[0][0] == ' ':
+        board[0][0] = 'O'
+    elif player2_choice == 2 and board[0][1] == ' ':
+        board[0][1] = 'O'
+    elif player2_choice == 3 and board[0][2] == ' ':       
+        board[0][2] = 'O'
+    elif player2_choice == 4 and board[1][0] == ' ' :  
+        board[1][0] = 'O'
+    elif player2_choice == 5 and board[1][1] == ' ': 
+        board[1][1] = 'O'
+    elif player2_choice == 6 and board[1][2] == ' ':
+        board[1][2] = 'O'
+    elif player2_choice == 7 and board[2][0] == ' ':
+        board[2][0] = 'O'
+    elif player2_choice == 8 and board[2][1] == ' ':
+        board[2][1] = 'O'
+    elif player2_choice == 9 and board[2][2] == ' ':
+        board[2][2] = 'O'
+    else:
+        print("Invalid move. Please try again.")
+        player2_move()
+
+
+#Now I will create a function to check if a player has won the game.
+
+def check_winner(symbol):
+    # Check rows
+    for row in board:
+        if row[0] == row[1] == row[2] == symbol:
+            return True
+
+    # Check columns
+    for col in range(3):
+        if board[0][col] == board[1][col] == board[2][col] == symbol:
+            return True
+
+    # Check diagonals
+    if board[0][0] == board[1][1] == board[2][2] == symbol:
+        return True
+    if board[0][2] == board[1][1] == board[2][0] == symbol:
+        return True
+
+    return False
+
+
+#main game loop
+def main():
+    while True:
+        print_board()
+        player1_move()
+        if check_winner('X'):
+            print_board()
+            print("Player 1 wins! 🎉")
+            break
+
+        print_board()
+        player2_move()
+        if check_winner('O'):
+            print_board()
+            print("Player 2 wins! 🎉")
+            break
+
+        # Optional: Tie condition
+        all_filled = all(cell != ' ' for row in board for cell in row)
+        if all_filled:
+            print_board()
+            print("It's a tie!")
+            break
+    print("Game over! Thanks for playing! 😊")
+
+
+main()
+
